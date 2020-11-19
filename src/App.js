@@ -18,7 +18,7 @@ const App = () => {
 }
 
 const usePaginate = (url, page, setPage) => {
-  const [pagination, setPagination] = useState({ page, next: true, prev: false })
+  const [pagination] = useState({ page, next: true, prev: false })
 
   const prevPage = () => {
     setPage(page - 1)
