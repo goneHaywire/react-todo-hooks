@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const http = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/todos',
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com/todos',
+
     timeout: 1000,
 });
 
