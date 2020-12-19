@@ -25,14 +25,14 @@ const Todos = () => {
 
     const addTodo = useCallback((newTodo) => {
         TodoService.addTodo(newTodo)
-            .then(resp => dispatch({ type: 'ADD_TODO', payload: newTodo }))
             .catch(err => dispatch({ type: 'ERROR', payload: err }))
+        dispatch({ type: 'ADD_TODO', payload: newTodo })
     }, [])
 
     const removeTodo = useCallback(id => {
         TodoService.deleteTodo(id)
-            .then(resp => dispatch({ type: 'DELETE_TODO', payload: id }))
             .catch(err => dispatch({ type: 'ERROR', payload: id }))
+        dispatch({ type: 'DELETE_TODO', payload: id })
     }, [])
 
     const toggleTodo = useCallback(id => {
