@@ -1,13 +1,15 @@
-import React, { useEffect, useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import TodoService from '../services/TodoService'
 
 const TodosReducer = (state, action) => {
     let newTodos;
     switch (action.type) {
-        case 'FETCH_TODOS':
-            return { ...state, loading: true, todos: [] }
+        case 'FETCHING_TODOS':
+            return { ...state, loading: true }
         case 'SET_TODOS':
-            return { ...state, loading: false, todos: action.payload }
+            return { ...state, page: state.page + 1, loading: false, todos: action.payload }
+        case 'APPEND_TODOS':
+            return { ...state, page: state.page + 1, loading: false, todos: [...state.todos, ...action.payload] }
         case 'ADD_TODO':
             return { ...state, todos: [action.payload, ...state.todos] }
         case 'TOGGLE_TODO':
@@ -21,21 +23,23 @@ const TodosReducer = (state, action) => {
             newTodos = state.todos.filter(todo => todo.id !== action.payload)
             return { ...state, todos: newTodos }
         case 'ERROR':
-            return { ...state, todos: [], error: action.payload }
+            return { ...state, error: action.payload }
         default:
             return state
     }
 }
 
-const useFetchTodos = (page) => {
-    const [state, dispatch] = useReducer(TodosReducer, { loading: true, error: false, todos: [] });
+const useFetchTodos = (prefetch) => {
+    const [state, dispatch] = useReducer(TodosReducer, { loading: false, error: false, todos: [], page: 0 });
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_TODOS' })
-        TodoService.getTodos(page)
-            .then(resp => dispatch({ type: 'SET_TODOS', payload: resp.data }))
-            .catch(err => dispatch({ type: 'ERROR', payload: err }))
-    }, [page])
+        if (prefetch) {
+            dispatch({ type: 'FETCHING_TODOS' })
+            TodoService.getTodos(state.page + 1)
+                .then(resp => dispatch({ type: 'APPEND_TODOS', payload: resp.data }))
+                .catch(err => dispatch({ type: 'ERROR', payload: err }))
+        }
+    }, [])
 
     return [state, dispatch]
 }
