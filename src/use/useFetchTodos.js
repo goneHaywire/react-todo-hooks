@@ -7,9 +7,9 @@ const TodosReducer = (state, action) => {
         case 'FETCHING_TODOS':
             return { ...state, loading: true }
         case 'SET_TODOS':
-            return { ...state, page: state.page + 1, loading: false, todos: action.payload }
+            return { ...state, page: state.page + 1, loading: false, todos: action.payload, error: false }
         case 'APPEND_TODOS':
-            return { ...state, page: state.page + 1, loading: false, todos: [...state.todos, ...action.payload] }
+            return { ...state, page: state.page + 1, loading: false, todos: [...state.todos, ...action.payload], error: false }
         case 'ADD_TODO':
             return { ...state, todos: [action.payload, ...state.todos] }
         case 'TOGGLE_TODO':
