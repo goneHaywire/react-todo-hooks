@@ -23,7 +23,7 @@ const TodosReducer = (state, action) => {
             newTodos = state.todos.filter(todo => todo.id !== action.payload)
             return { ...state, todos: newTodos }
         case 'ERROR':
-            return { ...state, error: action.payload }
+            return { ...state, loading: false, error: action.payload }
         default:
             return state
     }

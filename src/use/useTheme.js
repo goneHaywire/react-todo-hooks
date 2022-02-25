@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-
 const useTheme = (initialTheme) => {
     const [theme, setTheme] = useState(localStorage.getItem('theme') ?? initialTheme)
 

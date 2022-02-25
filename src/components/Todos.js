@@ -20,7 +20,6 @@ const Todos = () => {
                 .then(resp => dispatch({ type: 'APPEND_TODOS', payload: resp.data }))
                 .catch(err => dispatch({ type: 'ERROR', payload: err }))
         }
-
     }, [ifBottom])
 
     const addTodo = useCallback((newTodo) => {

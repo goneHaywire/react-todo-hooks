@@ -12,6 +12,7 @@ const usePaginate = (page, setPage) => {
     const nextPage = () => {
         setPage(page + 1)
     }
+
     useEffect(() => {
         pagination.page = page
         pagination.prev = page !== 1

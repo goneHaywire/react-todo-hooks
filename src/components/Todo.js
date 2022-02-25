@@ -1,9 +1,7 @@
 import { memo } from 'react'
 import { Card, Button } from 'react-bootstrap'
 
-const Todo = memo(({ todo, removeTodo, toggleTodo }) => {
-
-    return (
+const Todo = memo(({ todo, removeTodo, toggleTodo }) => (
         <Card className="mb-3">
             <Card.Body>
                 <Card.Title>
@@ -14,6 +12,6 @@ const Todo = memo(({ todo, removeTodo, toggleTodo }) => {
             </Card.Body>
         </Card>
     )
-})
+)
 
 export default Todo

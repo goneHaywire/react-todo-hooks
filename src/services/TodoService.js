@@ -2,7 +2,6 @@ import axios from 'axios'
 
 const http = axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com/todos',
-
     timeout: 1000,
 });
 
